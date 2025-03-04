@@ -6,6 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<MusicRepository>(new MusicRepository(true));
 
+
+// Tilføj CORS
+builder.Services.AddCors(options =>
+    {
+    options.AddPolicy("AllowOnlyGetPut",
+        builder => builder.AllowAnyOrigin().
+                   WithMethods("GET", "PUT", "DELETE", "POST").
+                   AllowAnyHeader()
+     );
+    }
+);
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+
+app.UseCors("AllowOnlyGetPut");
 
 app.MapControllers();
 
