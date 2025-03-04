@@ -4,3 +4,8 @@ GET {{ClassDemoMusicRest_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+@id=0
+GET {{ClassDemoMusicRest_HostAddress}}/api/musics/{{id}}
+
+###
